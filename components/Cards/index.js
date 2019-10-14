@@ -20,65 +20,103 @@
 const cardContainer = document.querySelector(".cards-container")
 
 
-const savedAxios = axios.get("https://lambda-times-backend.herokuapp.com/articles")
 
-.then(response => {
-        return response.data.articles;
+function cardCreater(data) {
+    const cardDiv1 = document.createElement("div");
+    const cardDiv2 = document.createElement("div");
+    const cardDiv3 = document.createElement("div");
+    const cardDiv4 = document.createElement("div");
+    const cardImg = document.createElement("img");
+    const cardSpan1 = document.createElement("span");
 
-
-
-    })
-    .catch(err => {
-        console.log('It didnt work!')
-    })
-
-savedAxios.then((data) => {
+    cardDiv1.classList.add("card");
 
 
-    function cardCreater() {
-        console.log(data)
-
-        for (let [key, value] of Object.entries(data.bootstrap)) {
-
-            const cardDiv1 = document.createElement("div");
-            const cardDiv2 = document.createElement("div");
-            const cardDiv3 = document.createElement("div");
-            const cardDiv4 = document.createElement("div");
-            const cardImg = document.createElement("img");
-            const cardSpan1 = document.createElement("span");
-
-            cardDiv1.classList.add("card");
+    cardDiv2.classList.add("headline");
+    cardDiv3.classList.add("author");
+    cardDiv4.classList.add("img-container");
 
 
-            cardDiv2.classList.add("headline");
-            cardDiv3.classList.add("author");
-            cardDiv4.classList.add("img-container");
+    cardDiv1.appendChild(cardDiv2);
+    cardDiv1.appendChild(cardDiv3);
+    cardDiv3.appendChild(cardDiv4);
+    cardDiv4.appendChild(cardImg);
+    cardDiv3.appendChild(cardSpan1);
+    cardContainer.appendChild(cardDiv1)
 
 
-            cardDiv1.appendChild(cardDiv2);
-            cardDiv1.appendChild(cardDiv3);
-            cardDiv3.appendChild(cardDiv4);
-            cardDiv4.appendChild(cardImg);
-            cardDiv3.appendChild(cardSpan1);
-            cardContainer.appendChild(cardDiv1)
+    for (let [key, value] of Object.entries(data.bootstrap)) {
 
 
 
-            cardDiv2.textContent = `${data.bootstrap[key].headline}`;
-            cardDiv3.textContent = `${data.bootstrap[key].authorName}`
-            cardDiv2.textContent = `${data.bootstrap[key].headline}`;
-            cardDiv3.textContent = `${data.bootstrap[key].authorName}`
-            cardImg.setAttribute("src", data.bootstrap[key].authorPhoto)
+        cardDiv2.textContent = `${data.bootstrap[key].headline}`;
+        cardDiv3.textContent = `${data.bootstrap[key].authorName}`
+        cardDiv2.textContent = `${data.bootstrap[key].headline}`;
+        cardDiv3.textContent = `${data.bootstrap[key].authorName}`
+        cardImg.setAttribute("src", data.bootstrap[key].authorPhoto)
 
 
-            for (let [key, value] of Object.entries(data.bootstrap)) {
+        for (let [key, value] of Object.entries(data.javascript)) {
 
 
-            }
 
 
+            cardDiv2.textContent = `${data.javascript[key].headline}`;
+            cardDiv3.textContent = `${data.javascript[key].authorName}`
+            cardDiv2.textContent = `${data.javascript[key].headline}`;
+            cardDiv3.textContent = `${data.javascript[key].authorName}`
+            cardImg.setAttribute("src", data.javascript[key].authorPhoto)
+        }
+
+        for (let [key, value] of Object.entries(data.jquery)) {
+
+
+
+
+            cardDiv2.textContent = `${data.jquery[key].headline}`;
+            cardDiv3.textContent = `${data.jquery[key].authorName}`
+            cardDiv2.textContent = `${data.jquery[key].headline}`;
+            cardDiv3.textContent = `${data.jquery[key].authorName}`
+            cardImg.setAttribute("src", data.jquery[key].authorPhoto)
+        }
+
+        for (let [key, value] of Object.entries(data.node)) {
+
+
+
+
+            cardDiv2.textContent = `${data.node[key].headline}`;
+            cardDiv3.textContent = `${data.node[key].authorName}`
+            cardDiv2.textContent = `${data.node[key].headline}`;
+            cardDiv3.textContent = `${data.node[key].authorName}`
+            cardImg.setAttribute("src", data.node[key].authorPhoto)
+        }
+
+        for (let [key, value] of Object.entries(data.technology)) {
+
+
+
+
+
+            cardDiv2.textContent = `${data.technology[key].headline}`;
+            cardDiv3.textContent = `${data.technology[key].authorName}`
+            cardDiv2.textContent = `${data.technology[key].headline}`;
+            cardDiv3.textContent = `${data.technology[key].authorName}`
+            cardImg.setAttribute("src", data.technology[key].authorPhoto)
         }
 
     }
-    cardCreater()
-})
+}
+
+const savedAxios = axios.get("https://lambda-times-backend.herokuapp.com/articles")
+
+.then(response => {
+
+        for (let key of Object.entries(response["data"]["articles"])) {
+            const savedvalue = cardCreater(response["data"]["articles"])
+        }
+
+    })
+    .catch(err => {
+        console.log("it didnt work !")
+    })
