@@ -44,8 +44,39 @@ function cardCreater(data) {
     cardDiv3.appendChild(cardSpan1);
     cardContainer.appendChild(cardDiv1)
 
+    for (let key in data.bootstrap) {
+        const cardDiv1 = document.createElement("div");
+        const cardDiv2 = document.createElement("div");
+        const cardDiv3 = document.createElement("div");
+        const cardDiv4 = document.createElement("div");
+        const cardImg = document.createElement("img");
+        const cardSpan1 = document.createElement("span");
 
-    for (let [key, value] of Object.entries(data.bootstrap)) {
+        cardDiv1.classList.add("card");
+
+
+        cardDiv2.classList.add("headline");
+        cardDiv3.classList.add("author");
+        cardDiv4.classList.add("img-container");
+
+
+        cardDiv1.appendChild(cardDiv2);
+        cardDiv1.appendChild(cardDiv3);
+        cardDiv3.appendChild(cardDiv4);
+        cardDiv4.appendChild(cardImg);
+        cardDiv3.appendChild(cardSpan1);
+        cardContainer.appendChild(cardDiv1)
+
+        cardDiv2.textContent = `${data.bootstrap[key].headline}`;
+        cardDiv3.textContent = `${data.bootstrap[key].authorName}`
+        cardDiv4.textContent = `${data.bootstrap[key].headline}`;
+        cardSpan1.textContent = `${data.bootstrap[key].authorName}`
+        cardImg.setAttribute("src", data.bootstrap[key].authorPhoto)
+
+    }
+
+
+    /*for (let [key, value] of Object.entries(data.bootstrap)) {
 
 
 
@@ -105,16 +136,17 @@ function cardCreater(data) {
             cardImg.setAttribute("src", data.technology[key].authorPhoto)
         }
 
-    }
 }
 
+*/
+}
 const savedAxios = axios.get("https://lambda-times-backend.herokuapp.com/articles")
 
 .then(response => {
 
-        for (let key of Object.entries(response["data"]["articles"])) {
-            const savedvalue = cardCreater(response["data"]["articles"])
-        }
+
+        return cardCreater(response["data"]["articles"])
+
 
     })
     .catch(err => {
