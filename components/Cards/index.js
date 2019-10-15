@@ -199,8 +199,6 @@ const savedAxios = axios.get("https://lambda-times-backend.herokuapp.com/article
 
 .then(response => {
 
-    console.log(response)
-
     for (let [key, value] of Object.entries(response["data"]["articles"])) {
         const savedData1 = new cardCreater(response["data"]["articles"]);
         cardContainer.appendChild(savedData1);
@@ -209,6 +207,6 @@ const savedAxios = axios.get("https://lambda-times-backend.herokuapp.com/article
 })
 
 .catch(err => {
-    console.log("it didnt work !")
+    return err
 
 })
